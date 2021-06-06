@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul class="buts">
+        <button>js</button><button>css</button><button>html</button><button>xml</button><button>json</button><button>page2</button><button>page3</button>
+    </ul>
+    {{page1}}
+</body>
+<script>
+    document.querySelector('.buts').addEventListener('click', (e) => {
+        if(e.target.innerHTML === 'js'){
+            const xml = new XMLHttpRequest();
+            xml.open('GET', '/main.js');
+            const script = document.createElement('script');
+            xml.onreadystatechange = () => {
+                if(xml.status === 200 && xml.readyState === 4){
+                    script.innerHTML = xml.response;
+                    document.querySelector('body').append(script);
+                }
+            }
+            xml.send();
+        } else if (e.target.innerHTML === 'css'){
+            const xml = new XMLHttpRequest();
+            xml.open('GET', '/style.css');
+            const css = document.createElement('style');
+            xml.onreadystatechange = () => {
+                if(xml.status === 200 && xml.readyState === 4){
+                    css.innerHTML = xml.response;
+                    document.querySelector('body').append(css);
+                }
+            }
+            xml.send();
+        } else if (e.target.innerHTML === 'html'){
+            const xml = new XMLHttpRequest();
+            xml.open('GET', '/3.html');
+            xml.onreadystatechange = () => {
+                if(xml.status === 200 && xml.readyState === 4){
+                    document.querySelector('body').append(xml.response);
+                }
+            }
+            xml.send();
+        }
+        else if(e.target.innerHTML === 'json'){
+            const xml = new XMLHttpRequest();
+            xml.open('GET', '/5.json');
+            xml.onreadystatechange = () => {
+                if(xml.status === 200 && xml.readyState === 4){
+                    document.querySelector('body').append(xml.response);
+                }
+            }
+            xml.send();
+        }
+        if(e.target.innerHTML === "page2"){
+            const xml = new XMLHttpRequest();
+            xml.open('GET', '/page2');
+            xml.onreadystatechange = () => {
+                if(xml.status === 200 && xml.readyState === 4){
+                    const arr = JSON.parse(xml.response);
+                    xxx.innerHTML = arr.map((item)=>{
+                        return `<li>${item}</li>`
+                    }).join('');
+                }
+            }
+            xml.send();
+        }
+        if(e.target.innerHTML === 'page3'){
+            const xml = new XMLHttpRequest();
+            xml.open('GET', '/page3');
+            xml.onreadystatechange = () => {
+                if(xml.status === 200 && xml.readyState === 4){
+                    const arr = JSON.parse(xml.response);
+                    xxx.innerHTML = arr.map((item)=>{
+                        return `<li>${item}</li>`
+                    }).join('');
+                }
+            }
+            xml.send();
+        }        
+        if(e.target.innerHTML === 'xml'){
+            const xml = new XMLHttpRequest();
+            xml.open('GET', '/4.xml');
+            xml.onreadystatechange = () => {
+                if(xml.status === 200 && xml.readyState === 4){
+                    const parser=new DOMParser();
+                    xmlDoc=parser.parseFromString(xml.response,"text/xml");
+                    console.log(xmlDoc, xmlDoc.getElementsByTagName('to'))
+                }
+            }
+            xml.send();
+        }
+    })
+</script>
+</html>

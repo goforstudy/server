@@ -1,0 +1,1 @@
+window.alert('你已经加载完成js')
